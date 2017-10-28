@@ -16,7 +16,7 @@ class App extends Component {
 
   sendRequest(){
     axios.post('localhost:5000/fetch', {
-      param: {
+      params: {
         firstname: this.state.userName.split(' ')[0],
         lastname: this.state.userName.split(' ')[1],
         group_id: groupcut(this.state.linktext),
