@@ -4,6 +4,7 @@ import FacebookLogin from 'react-facebook-login';
 import axios from 'axios';
 import logo from './cfkalogo.png';
 import './App.css';
+import groupcut from './groupHandler.js'
 
 class App extends Component {
   state = {
@@ -16,11 +17,11 @@ class App extends Component {
   sendRequest(){
     axios.post('localhost:5000/fetch', {
       param: {
-        // name:,
-        // user_id:,
-        // group_id:,
-        // keyword:,
-        // access_token:
+        firstname: this.state.,
+        lastname: this.state.userName,
+        group_id: groupcut(this.state.linktext),
+        keyword: this.state.keytext,
+        access_token: this.state.accessToken
       }
     })
   }
@@ -39,10 +40,15 @@ onclick = async () => {
   this.resetInput()
 }
 
-handleChange = e => {
+handleChangeKey = e => {
   this.setState({
     keytext: e.target.value,
-    keysuccess: false,
+    keysuccess: false
+  })
+}
+
+handleChangeLink = e => {
+  this.setState({
     linktext: e.target.value,
     linksuccess: false
   })
@@ -112,14 +118,14 @@ handleChange = e => {
               type="text"
               placeholder="Key word"
               value={this.state.keytext}
-              onChange={this.handleChange}></input>
+              onChange={this.handleChangeKey}></input>
             <input
               className="form-control mb-2 mr-sm-2 mb-sm-0"
               id="input-text"
               type="text"
               placeholder="Group link"
               value={this.state.linktext}
-              onChange={this.handelChange}></input>
+              onChange={this.handelChangeLink}></input>
             <a href="https://m.me/502138216822140?ref=hello">
               <button
                 className="btn btn-secondary"
