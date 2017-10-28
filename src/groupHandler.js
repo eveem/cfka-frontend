@@ -1,10 +1,14 @@
 var axios = require('axios')
 
 function extractGroupIDFromUrl(url) {
-  var regex = new RegExp('.+\\.com\\/groups\\/(.+)\\/')
+  // console.log(url);
+  var regex = /.+\.com\/groups\/(.+)\//
   var result = url.match(regex)
 
   // console.log(result[1])
+  if (!isNaN(result[1])) {
+    return { id: result[1], name: '' }
+  }
 
   axios.get('https://graph.facebook.com/search', {
     params: {
@@ -14,7 +18,7 @@ function extractGroupIDFromUrl(url) {
     }
   })
   .then(function (response) {
-    console.log(response.data.data[0]);
+    // console.log(response.data.data[0]);
     return response.data.data[0]
   })
   .catch(function (error) {
