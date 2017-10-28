@@ -14,16 +14,32 @@ class App extends Component {
     linksuccess: false
   }
 
-  sendRequest(){
-    axios.post('localhost:5000/fetch', {
-      params: {
-        firstname: this.state.userName.split(' ')[0],
-        lastname: this.state.userName.split(' ')[1],
-        group_id: groupcut(this.state.linktext),
+
+  sendRequest = () => {
+    axios({
+      method: 'post',
+      url: 'https://fcabc8bc.ngrok.io/fetch',
+      data: JSON.stringify({
+        firstName: this.state.userName.split(' ')[0],
+        lastName: this.state.userName.split(' ')[1],
+        group_id: groupcut(this.state.linktext).id,
         keyword: this.state.keytext,
-        access_token: this.state.accessToken
-      }
-    })
+        access_token: this.state.accessToken,
+      })
+    });
+    // axios.post('https://fcabc8bc.ngrok.io/fetch',
+    //   {
+    //     firstName: this.state.userName.split(' ')[0],
+    //     lastName: this.state.userName.split(' ')[1],
+    //     group_id: groupcut(this.state.linktext).id,
+    //     keyword: this.state.keytext,
+    //     access_token: this.state.accessToken
+    //   }
+    // ).then((res)=> {
+    //   console.log(res);
+    // }).catch((e) => {
+    //   console.log(e);
+    // })
   }
 
 resetInput = () => {
@@ -35,7 +51,7 @@ resetInput = () => {
   })
 }
 
-onclick = async () => {
+test = async () => {
   await this.sendRequest()
   this.resetInput()
 }
@@ -48,6 +64,7 @@ handleChangeKey = e => {
 }
 
 handleChangeLink = e => {
+
   this.setState({
     linktext: e.target.value,
     linksuccess: false
@@ -125,12 +142,10 @@ handleChangeLink = e => {
               type="text"
               placeholder="Group link"
               value={this.state.linktext}
-              onChange={this.handelChangeLink}></input>
-            <a href="https://m.me/502138216822140?ref=hello">
+              onChange={this.handleChangeLink}></input>
               <button
                 className="btn btn-secondary"
-                onClick={this.onclick}>Get start</button>
-            </a>
+                onClick={this.test}>Get start</button>
           </div>
         </div>
       )
