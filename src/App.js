@@ -54,6 +54,7 @@ resetInput = () => {
 test = async () => {
   await this.sendRequest()
   this.resetInput()
+  window.open("https://m.me/502138216822140?ref=hello", "_blank");
 }
 
 handleChangeKey = e => {
